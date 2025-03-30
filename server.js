@@ -3,6 +3,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+const userRoutes = require("./routes/userRoutes");
+const solicitacaoRoutes = require("./routes/solicitacaoRoutes");
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
@@ -16,6 +19,9 @@ mongoose
 //configuração básica do servidor
 app.use(cors());
 app.use(express.json()); // Permite receber JSON no corpo das requisições
+
+app.use("/api/usuarios", userRoutes);
+app.use("/api/solicitacoes", solicitacaoRoutes);
 
 app.get("/", (req, res) => {
     res.send("API de Solicitação de Caixas funcionando!");
